@@ -1,0 +1,39 @@
+
+    public boolean checkEmployeeDataSyncWithDB(String name) {
+        List<EmployeePayrollData> employeeDataList = getEmployeePayrollData(name);
+        return employeeDataList.get(0).equals(getEmployeeData(name));
+    }
+
+    public List<EmployeePayrollData> getEmployeePayrollData(String name) {
+        List<EmployeePayrollData> employeePayrollDataList = null;
+        if (this.employeePayrollDataStatement == null)
+            this.prepareStatementForEmployeeData();
+        try {
+            employeePayrollDataStatement.setString(1, name);
+            ResultSet resultSet = employeePayrollDataStatement.executeQuery();
+            employeePayrollDataList = this.getEmployeePayrollData(resultSet);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return employeePayrollDataList;
+    }
+
+    private void prepareStatementForEmployeeData() {
+        try {
+            Connection connection = this.getConnection();
+            String sql = "select * from employee where name= ?";
+            employeePayrollDataStatement = connection.prepareStatement(sql);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private EmployeePayrollData getEmployeeData(String name) {
+        EmployeePayrollData employeePayrollData;
+        employeePayrollData = this.employeePayrollList.stream()
+                .filter(employeePayrollDataItem -> employeePayrollDataItem.name.equals(name))
+                .findFirst()
+                .orElse(null);
+        return employeePayrollData;
+    }
+

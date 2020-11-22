@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bridgelabz.employeePayroll.EmployeePayrollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-11-21T05:22:29" hostname="DESKTOP-RFK6RG2" time="2.778">
+  <properties/>
+  <testcase name="givenEmployee_whenDeleted_shouldSyncWithDB" classname="com.bridgelabz.employeePayroll.EmployeePayrollServiceTest" time="2.778"/>
+  <system-out><![CDATA[deleted row : 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
